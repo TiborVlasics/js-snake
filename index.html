@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Snake</title>
+        <style>
+            body {
+                background: #282022;
+                color: #fff;
+                display: flex;
+                font-family: sans-serif;
+                font-size: 2em;
+                text-align: center;
+                margin: 0;
+            }
+
+            .player {
+                flex: 1 1 auto;
+            }
+
+            canvas {
+                border: solid .2em rgb(212, 212, 212);
+                height: 90vh;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="player">
+            <div class="score"></div>
+            <canvas class="snake" width="400px" height="240px"></canvas>
+        </div>
+        
+        <script src="Arena.js"></script>
+        <script src="Player.js"></script>
+        <script src="Snake.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
