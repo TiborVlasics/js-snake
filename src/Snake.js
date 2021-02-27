@@ -4,8 +4,8 @@ class Snake {
     this.canvas = element.querySelector('canvas');
 
     this.context = this.canvas.getContext('2d');
-    this.context.scale(10, 10);
-    this.arena = new Arena(40, 24);
+    this.context.scale(5, 5);
+    this.arena = new Arena(80, 48);
     this.player = new Player();
 
     this.colors = [
@@ -14,7 +14,16 @@ class Snake {
       "#00ff00",
     ];
 
-    this.draw();
+    let lastTime = 0;
+    const update = (time = 0) => {
+        const deltaTime = time - lastTime;
+        lastTime = time;
+        
+        this.player.update(deltaTime);
+        this.draw();
+        requestAnimationFrame(update);
+    }
+    update();
   }
 
   draw() {
