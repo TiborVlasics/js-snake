@@ -10,6 +10,8 @@ class Player {
       ['1', '1'],
       ['1', '1']
     ]
+
+    document.addEventListener('keydown', this._keyDownListener);
   }
 
   update(deltaTime) {
@@ -31,10 +33,36 @@ class Player {
         ++this.position.x;
         break;
       case 'w':
-        --this.position.y;
+        --this.position.x;
         break;
       default:
     }
     this.moveCounter = 0;
   }
+
+  _keyDownListener = (e) => [87, 65, 83, 68].forEach(val => {
+    switch(e.keyCode) {
+      case 87:
+        if (this.direction !== 's') {
+          this.direction = 'n';
+        }
+        break;
+      case 65:
+        if (this.direction !== 'e') {
+          this.direction = 'w';
+        }
+        break;
+      case 83:
+        if (this.direction !== 'n') {
+          this.direction = 's';
+        }
+        break;
+      case 68:
+        if (this.direction !== 'w') {
+          this.direction = 'e';
+        }
+        break;
+      default:
+    }
+});
 }
