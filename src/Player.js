@@ -3,6 +3,7 @@ class Player {
     this.moveCounter = 0;
     this.moveInterval = 300;
     
+    this.requestedDirection;
     this.direction = ['n', 's', 'e', 'w'][Math.floor(Math.random() * 4)]
   
     this.position = { x: 0, y: 0 };
@@ -22,6 +23,8 @@ class Player {
   }
 
   _move() {
+    this._changeDirection();
+
     switch(this.direction) {
       case 'n':
         --this.position.y;
@@ -43,26 +46,30 @@ class Player {
   _keyDownListener = (e) => [87, 65, 83, 68].forEach(val => {
     switch(e.keyCode) {
       case 87:
-        if (this.direction !== 's') {
-          this.direction = 'n';
-        }
+          this.requestedDirection = 'n';
         break;
       case 65:
-        if (this.direction !== 'e') {
-          this.direction = 'w';
-        }
+          this.requestedDirection = 'w';
         break;
       case 83:
-        if (this.direction !== 'n') {
-          this.direction = 's';
-        }
+          this.requestedDirection = 's';
         break;
       case 68:
-        if (this.direction !== 'w') {
-          this.direction = 'e';
-        }
+          this.requestedDirection = 'e';
         break;
       default:
     }
 });
+
+  _changeDirection() {
+    if (this.requestedDirection === 'n' && this.direction !== 's') {
+      this.direction = 'n';
+    } else if (this.requestedDirection === 's' && this.direction !== 'n') {
+      this.direction = 's';
+    } else if (this.requestedDirection === 'w' && this.direction !== 'e') {
+      this.direction = 'w';
+    } else if (this.requestedDirection === 'e' && this.direction !== 'w') {
+      this.direction = 'e';
+    }
+  }
 }

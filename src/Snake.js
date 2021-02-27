@@ -10,8 +10,8 @@ class Snake {
 
     this.colors = [
       "#000",
-      "#ff0000",
-      "#00ff00",
+      "#00FF00",
+      "#FF0000",
     ];
 
     let lastTime = 0;
