@@ -1,7 +1,8 @@
 class Snake {
-  constructor() {
+  constructor(game) {
     this.moveCounter = 0;
     this.moveInterval = 300;
+    this.arena = game.arena;
     
     this.requestedDirection;
     this.direction = ['n', 's', 'e', 'w'][Math.floor(Math.random() * 4)]
@@ -24,7 +25,7 @@ class Snake {
 
   _move() {
     this._changeDirection();
-
+  
     switch(this.direction) {
       case 'n':
         --this.position.y;
@@ -40,6 +41,25 @@ class Snake {
         break;
       default:
     }
+
+    if(this.arena.collide(this)) {
+      switch(this.direction) {
+        case 'n':
+          ++this.position.y;
+          break;
+        case 's':
+          --this.position.y;
+          break;
+        case 'e':
+          --this.position.x;
+          break;
+        case 'w':
+          ++this.position.x;
+          break;
+        default:
+      }
+    }
+
     this.moveCounter = 0;
   }
 
@@ -59,7 +79,7 @@ class Snake {
         break;
       default:
     }
-});
+  });
 
   _changeDirection() {
     if (this.requestedDirection === 'n' && this.direction !== 's') {

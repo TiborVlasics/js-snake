@@ -6,7 +6,7 @@ class Game {
     this.context = this.canvas.getContext('2d');
     this.context.scale(5, 5);
     this.arena = new Arena(80, 48);
-    this.player = new Snake();
+    this.player = new Snake(this);
 
     this.colors = [
       "#000",
