@@ -5,9 +5,7 @@ class Game {
 
     this.context = this.canvas.getContext('2d');
     this.context.scale(5, 5);
-    this.arena = new Arena(80, 48);
-    this.player = new Snake(this);
-    this.spawner = new Spawner();
+    this.state = new State();
 
     this.colors = [
       "#000",
@@ -20,8 +18,8 @@ class Game {
         const deltaTime = time - lastTime;
         lastTime = time;
         
-        this.spawner.spawnPower(deltaTime, this.player)
-        this.player.update(deltaTime);
+        this.state.spawner.spawnPower(deltaTime,)
+        this.state.player.update(deltaTime);
         this.draw();
         requestAnimationFrame(update);
     }
@@ -32,9 +30,9 @@ class Game {
     this.context.fillStyle = '#000';
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this._drawMatrix(this.arena.matrix, { x: 0, y: 0 });
-    this._drawMatrix(this.player.matrix, this.player.position);
-    this.spawner.powers.forEach(element => {
+    this._drawMatrix(this.state.arena.matrix, { x: 0, y: 0 });
+    this._drawMatrix(this.state.player.matrix, this.state.player.position);
+    this.state.powers.forEach(element => {
       this._drawMatrix(element.matrix, element.position);
     });
   }
