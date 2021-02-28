@@ -7,6 +7,7 @@ class Game {
     this.context.scale(5, 5);
     this.arena = new Arena(80, 48);
     this.player = new Snake(this);
+    this.spawner = new Spawner();
 
     this.colors = [
       "#000",
@@ -19,6 +20,7 @@ class Game {
         const deltaTime = time - lastTime;
         lastTime = time;
         
+        this.spawner.spawnPower(deltaTime, this.player)
         this.player.update(deltaTime);
         this.draw();
         requestAnimationFrame(update);
@@ -32,6 +34,9 @@ class Game {
 
     this._drawMatrix(this.arena.matrix, { x: 0, y: 0 });
     this._drawMatrix(this.player.matrix, this.player.position);
+    this.spawner.powers.forEach(element => {
+      this._drawMatrix(element.matrix, element.position);
+    });
   }
 
   _drawMatrix(matrix, offset) {
