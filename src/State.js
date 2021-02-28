@@ -22,7 +22,9 @@ class State {
         this.powers.forEach(power => {
             for (let y = 0; y <  power.matrix.length; y++) {
                 for (let x = 0; x < power.matrix[y].length; x++) {
-                    matrixBuffer[y + power.position.y][x + power.position.x] = '2';
+                    if(matrixBuffer[y + power.position.y][x + power.position.x] !== '1') {
+                        matrixBuffer[y + power.position.y][x + power.position.x] = '2';
+                    }
                 }
             }
         })

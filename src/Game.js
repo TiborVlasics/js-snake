@@ -18,8 +18,8 @@ class Game {
         const deltaTime = time - lastTime;
         lastTime = time;
         
-        this.state.spawner.spawnPower(deltaTime,)
         this.state.player.update(deltaTime);
+        this.state.spawner.update(deltaTime,)
         this.draw();
         requestAnimationFrame(update);
     }

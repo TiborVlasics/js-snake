@@ -20,6 +20,18 @@ class Power {
         }, 10000);
     }
 
+    update() {
+        const matrixBuffer = this.state.getBuffer();
+        for (let y = 0; y < this.matrix.length; ++y) {
+            for (let x = 0; x < this.matrix[y].length; ++x) {
+                if (matrixBuffer[this.position.y + y][this.position.x + x] === '1') {
+                    this.spawner.despawnPower(this.id);
+                    return;
+                }
+            }
+        }
+    }
+
     _setPosition() {
         const matrixBuffer = this.state.getBuffer();
 

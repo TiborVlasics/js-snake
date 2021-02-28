@@ -4,15 +4,25 @@ class Spawner {
         this.powers = state.powers;
         this.player = state.player;
         this.spawnCounter = 0;
-        this.spawnInterval = 5000;
+        this.spawnInterval = 600;
+        this.moveCounter = 0;
+        this.moveInterval = 300;
     }
 
-    spawnPower(deltaTime, snake) {
+    update(deltaTime, snake) {
         this.spawnCounter += deltaTime;
+        this.moveCounter += deltaTime;
+
         if(this.spawnCounter > this.spawnInterval) {
           const power = new Power(this.state, this);
           this.state.powers = [...this.state.powers, power];
           this.spawnCounter = 0;
+        }
+        if(this.moveCounter > this.moveInterval) {
+            this.moveCounter = 0;
+            this.state.powers.forEach(element => {
+                element.update();
+            });
         }
     }
 
