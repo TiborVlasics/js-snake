@@ -32,6 +32,11 @@ class Game {
 
     this._drawMatrix(this.state.arena.matrix, { x: 0, y: 0 });
     this._drawMatrix(this.state.player.matrix, this.state.player.position);
+    let body = this.state.player.snakeBody;
+    while (body) {
+      this._drawMatrix(body.matrix, body.position);
+      body = body.snakeBody;
+    }
     this.state.powers.forEach(element => {
       this._drawMatrix(element.matrix, element.position);
     });

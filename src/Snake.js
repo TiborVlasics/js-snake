@@ -13,6 +13,9 @@ class Snake {
       ['1', '1']
     ]
 
+    this.hasConsumedPower = false;
+    this.snakeBody = null;
+
     document.addEventListener('keydown', this._keyDownListener);
   }
 
@@ -25,6 +28,7 @@ class Snake {
 
   _move() {
     this._changeDirection();
+    const prevPosition = { ...this.position };
   
     switch(this.direction) {
       case 'n':
@@ -60,6 +64,8 @@ class Snake {
       }
     }
 
+    this._handleBodyMovement(prevPosition);
+
     this.moveCounter = 0;
   }
 
@@ -80,6 +86,23 @@ class Snake {
       default:
     }
   });
+
+  _handleBodyMovement(prevPosition) {
+    if (this.hasConsumedPower) {
+      this.hasConsumedPower = false;
+      if (this.snakeBody) {
+        this.snakeBody.hasConsumedPower = true;
+        this.snakeBody.setPosition(prevPosition);
+      } else {
+        this.snakeBody = new SnakeBody(prevPosition);
+      }
+    } else if (this.snakeBody) {
+      this.snakeBody.setPosition(prevPosition);
+    }
+    if (this.snakeBody) {
+      this.snakeBody.update();
+    }
+  }
 
   _changeDirection() {
     if (this.requestedDirection === 'n' && this.direction !== 's') {

@@ -26,6 +26,7 @@ class Power {
             for (let x = 0; x < this.matrix[y].length; ++x) {
                 if (matrixBuffer[this.position.y + y][this.position.x + x] === '1') {
                     this.spawner.despawnPower(this.id);
+                    this.state.player.hasConsumedPower = true;
                     return;
                 }
             }
