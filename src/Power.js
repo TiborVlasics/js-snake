@@ -1,8 +1,7 @@
-
 let id = 0;
 
 class Power {
-    constructor(snake, powers) {
+    constructor(snake, powers, spawner) {
         this.id = id++;
         this.matrix = [
           ['2', '2'],
@@ -46,5 +45,10 @@ class Power {
                 this.position = position;
                 break;
             }
+
+      setTimeout(() => {
+        spawner.despawnPower(this.id)
+      }, 10000);
     }
+
 }
