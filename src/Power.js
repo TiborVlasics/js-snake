@@ -38,8 +38,8 @@ class Power {
 
         outer: while (true) {
             const position = {
-                x: Math.floor(Math.random() * 79),
-                y: Math.floor(Math.random() * 47)
+                x: Math.floor(Math.random() * 40) * 2,
+                y: Math.floor(Math.random() * 24) * 2
             };
 
             for (let y = 0; y < this.matrix.length; ++y) {

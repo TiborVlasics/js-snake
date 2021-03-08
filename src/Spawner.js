@@ -4,7 +4,7 @@ class Spawner {
         this.powers = state.powers;
         this.player = state.player;
         this.spawnCounter = 0;
-        this.spawnInterval = 600;
+        this.spawnInterval = 12000;
         this.moveCounter = 0;
         this.moveInterval = 300;
     }

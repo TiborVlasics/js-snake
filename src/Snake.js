@@ -7,7 +7,7 @@ class Snake {
     this.requestedDirection;
     this.direction = ['n', 's', 'e', 'w'][Math.floor(Math.random() * 4)]
   
-    this.position = { x: 0, y: 0 };
+    this.position = { x: 40, y: 22 };
     this.matrix = [
       ['1', '1'],
       ['1', '1']
@@ -32,16 +32,16 @@ class Snake {
   
     switch(this.direction) {
       case 'n':
-        --this.position.y;
+        this.position.y -= 2;
         break;
       case 's':
-        ++this.position.y;
+        this.position.y +=2;
         break;
       case 'e':
-        ++this.position.x;
+        this.position.x +=2;
         break;
       case 'w':
-        --this.position.x;
+        this.position.x -=2;
         break;
       default:
     }
@@ -49,16 +49,16 @@ class Snake {
     if(this.arena.collide(this)) {
       switch(this.direction) {
         case 'n':
-          ++this.position.y;
+          this.position.y +=2;
           break;
         case 's':
-          --this.position.y;
+          this.position.y -=2;
           break;
         case 'e':
-          --this.position.x;
+          this.position.x -=2;
           break;
         case 'w':
-          ++this.position.x;
+          this.position.x +=2;
           break;
         default:
       }
