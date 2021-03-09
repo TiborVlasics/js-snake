@@ -44,16 +44,16 @@ class Snake {
     if(this.arena.collide(this)) {
       switch(this.direction) {
         case 'n':
-          this.position.y +=2;
+          this.position.y = this.state.height - 2;
           break;
         case 's':
-          this.position.y -=2;
+          this.position.y = 0;
           break;
         case 'e':
-          this.position.x -=2;
+          this.position.x  = 0;
           break;
         case 'w':
-          this.position.x +=2;
+          this.position.x = this.state.width - 2;
           break;
         default:
       }
