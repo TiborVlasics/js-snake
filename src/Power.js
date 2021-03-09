@@ -14,12 +14,6 @@ class Power {
         this._despawn(spawner);
     }
 
-    _despawn(spawner) {
-        setTimeout(() => {
-            spawner.despawnPower(this.id);
-        }, 10000);
-    }
-
     update() {
         const matrixBuffer = this.state.getBuffer();
         for (let y = 0; y < this.matrix.length; ++y) {
@@ -27,10 +21,17 @@ class Power {
                 if (matrixBuffer[this.position.y + y][this.position.x + x] === '1') {
                     this.spawner.despawnPower(this.id);
                     this.state.player.hasConsumedPower = true;
+                    this.state.setScore(1);
                     return;
                 }
             }
         }
+    }
+
+    _despawn(spawner) {
+        setTimeout(() => {
+            spawner.despawnPower(this.id);
+        }, 20000);
     }
 
     _setPosition() {

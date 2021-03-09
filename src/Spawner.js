@@ -3,27 +3,20 @@ class Spawner {
         this.state = state;
         this.powers = state.powers;
         this.player = state.player;
-        this.spawnCounter = 0;
-        this.spawnInterval = 12000;
-        this.moveCounter = 0;
-        this.moveInterval = 300;
+        this.ticks = 0;
     }
 
-    update(deltaTime, snake) {
-        this.spawnCounter += deltaTime;
-        this.moveCounter += deltaTime;
+    update() {
+        this.ticks ++;
 
-        if(this.spawnCounter > this.spawnInterval) {
+        if(this.ticks == 10) {
           const power = new Power(this.state, this);
           this.state.powers = [...this.state.powers, power];
-          this.spawnCounter = 0;
+          this.ticks = 0;
         }
-        if(this.moveCounter > this.moveInterval) {
-            this.moveCounter = 0;
-            this.state.powers.forEach(element => {
-                element.update();
-            });
-        }
+        this.state.powers.forEach(element => {
+            element.update();
+        });
     }
 
     despawnPower(id) {

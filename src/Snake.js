@@ -1,9 +1,6 @@
 class Snake {
-  constructor(game) {
-    this.moveCounter = 0;
-    this.moveInterval = 300;
-    this.arena = game.arena;
-    
+  constructor(state) {
+    this.arena = state.arena;    
     this.requestedDirection;
     this.direction = ['n', 's', 'e', 'w'][Math.floor(Math.random() * 4)]
   
@@ -20,16 +17,13 @@ class Snake {
   }
 
   update(deltaTime) {
-    this.moveCounter += deltaTime;
-    if(this.moveCounter > this.moveInterval) {
-      this._move();
-    }
+    this._changeDirection();
+    const prevPosition = { ...this.position };
+    this._move();
+    this._handleBodyMovement(prevPosition);
   }
 
   _move() {
-    this._changeDirection();
-    const prevPosition = { ...this.position };
-  
     switch(this.direction) {
       case 'n':
         this.position.y -= 2;
@@ -63,10 +57,6 @@ class Snake {
         default:
       }
     }
-
-    this._handleBodyMovement(prevPosition);
-
-    this.moveCounter = 0;
   }
 
   _keyDownListener = (e) => [87, 65, 83, 68].forEach(val => {

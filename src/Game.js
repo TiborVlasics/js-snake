@@ -6,6 +6,7 @@ class Game {
     this.context = this.canvas.getContext('2d');
     this.context.scale(5, 5);
     this.state = new State();
+    this.snake_speed = 1.5;
 
     this.colors = [
       "#000",
@@ -14,16 +15,23 @@ class Game {
     ];
 
     let lastTime = 0;
-    const update = (time = 0) => {
-        const deltaTime = time - lastTime;
-        lastTime = time;
-        
-        this.state.player.update(deltaTime);
-        this.state.spawner.update(deltaTime,)
-        this.draw();
+    const update = (currentTime = 0) => {
         requestAnimationFrame(update);
+        const deltaTime = (currentTime - lastTime) / 1000;
+
+        if(deltaTime < 1 / this.snake_speed) {
+          return;
+        }
+        
+        lastTime = currentTime;
+        this.state.player.update(deltaTime);
+        this.state.spawner.update(deltaTime)
+        this.draw();
     }
+    this.draw();
     update();
+
+    this.state.getScore$().subscribe(() => this.snake_speed += 0.1);
   }
 
   draw() {

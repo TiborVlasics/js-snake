@@ -1,9 +1,15 @@
+const { Observable, BehaviorSubject, from, asObservable } = rxjs;
+
 class State {
+    scoreElement = document.querySelector('.score>span')
+
     constructor() {
+        this.score = new BehaviorSubject(0);
         this.powers = [];
         this.arena = new Arena(80, 48);
         this.player = new Snake(this);
         this.spawner = new Spawner(this);
+        this.scoreElement.innerHTML = this.score._value;
     }
 
     getBuffer() {
@@ -29,5 +35,14 @@ class State {
             }
         })
         return matrixBuffer;
+    }
+
+    setScore(amount) {
+        this.score.next(this.score._value + amount);
+        this.scoreElement.innerHTML = this.score._value;
+    }
+
+    getScore$() {
+        return this.score.asObservable();
     }
 }

@@ -28,7 +28,7 @@ class SnakeBody {
         this.snakeBody.setPosition(this.prevPosition);
         }
         if(this.snakeBody) {
-        this.snakeBody.update();
+          this.snakeBody.update();
         }
     }
 }
