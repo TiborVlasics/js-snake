@@ -1,5 +1,6 @@
 class Snake {
   constructor(state) {
+    this.state = state;
     this.arena = state.arena;    
     this.requestedDirection;
     this.direction = ['n', 's', 'e', 'w'][Math.floor(Math.random() * 4)]
@@ -84,7 +85,7 @@ class Snake {
         this.snakeBody.hasConsumedPower = true;
         this.snakeBody.setPosition(prevPosition);
       } else {
-        this.snakeBody = new SnakeBody(prevPosition);
+        this.snakeBody = new SnakeBody(prevPosition, this.state);
       }
     } else if (this.snakeBody) {
       this.snakeBody.setPosition(prevPosition);
