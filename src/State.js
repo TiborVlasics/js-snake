@@ -4,9 +4,12 @@ class State {
     scoreElement = document.querySelector('.score>span')
 
     constructor() {
+        this.width = 80;
+        this.height = 48;
         this.score = new BehaviorSubject(0);
+        this.snakeTailCollisionNotifier = new BehaviorSubject(false);
         this.powers = [];
-        this.arena = new Arena(80, 48);
+        this.arena = new Arena(this.width, this.height);
         this.player = new Snake(this);
         this.snakeBodies = [];
         this.spawner = new Spawner(this);

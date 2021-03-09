@@ -4,8 +4,8 @@ class SnakeBody {
         this.prevPosition;
         this.position = position;
         this.matrix = [
-          ['1', '1'],
-          ['1', '1']
+          ['3', '3'],
+          ['3', '3']
         ]
         this.snakeBody = null;
         this.hasConsumedPower = false;
@@ -18,19 +18,24 @@ class SnakeBody {
     }
 
     update() {
-        if (this.hasConsumedPower) {
-            this.hasConsumedPower = false;
-            if (this.snakeBody) {
-              this.snakeBody.hasConsumedPower = true;
-              this.snakeBody.setPosition(this.prevPosition);
-            } else {
-              this.snakeBody = new SnakeBody(this.prevPosition, this.state);
-            }
-        } else if(this.snakeBody) {
-        this.snakeBody.setPosition(this.prevPosition);
+      if(detectCollision(this.state.width, this.state.height, this, this.state.player)) {
+        this.state.snakeTailCollisionNotifier.next(true);
+      }
+
+      if (this.hasConsumedPower) {
+        this.hasConsumedPower = false;
+        if (this.snakeBody) {
+          this.snakeBody.hasConsumedPower = true;
+          this.snakeBody.setPosition(this.prevPosition);
+        } else {
+          this.snakeBody = new SnakeBody(this.prevPosition, this.state);
         }
-        if(this.snakeBody) {
-          this.snakeBody.update();
-        }
+      } else if (this.snakeBody) {
+      this.snakeBody.setPosition(this.prevPosition);
+      }
+
+      if(this.snakeBody) {
+        this.snakeBody.update();
+      }
     }
 }
